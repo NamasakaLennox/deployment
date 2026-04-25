@@ -1,0 +1,32 @@
+<section class="notebook-page">
+  <h2>Notebooks</h2>
+
+  <form class="notebook-form" (ngSubmit)="submit()">
+    <input [(ngModel)]="form.title" name="title" placeholder="Title" required />
+    <input [(ngModel)]="form.author" name="author" placeholder="Author" />
+    <input [(ngModel)]="form.year" name="year" placeholder="Year" />
+    <textarea
+      [(ngModel)]="form.description"
+      name="description"
+      placeholder="Description"
+    ></textarea>
+    <button type="submit">Add Notebook</button>
+  </form>
+
+  <p *ngIf="isLoading">Loading notebooks...</p>
+  <p *ngIf="!isLoading && notebooks.length === 0">No notebooks yet. Add your first one.</p>
+
+  <ul *ngIf="!isLoading && notebooks.length > 0" class="notebook-list">
+    <li *ngFor="let notebook of notebooks">
+      <div>
+        <strong>{{ notebook.title }}</strong>
+        <span>
+          {{ notebook.author || 'Unknown author' }}
+          <ng-container *ngIf="notebook.year">({{ notebook.year }})</ng-container>
+        </span>
+      </div>
+      <p>{{ notebook.description || 'No description provided.' }}</p>
+      <button type="button" (click)="delete(notebook.id)">Delete</button>
+    </li>
+  </ul>
+</section>
