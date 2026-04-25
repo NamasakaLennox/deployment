@@ -4,8 +4,20 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-notebooks = []
-current_id = 1
+notebooks = [{
+    'id': 1,
+    'title': 'Notebook 1',
+    'author': 'Author 1',
+    'year': 2021,
+    'description': 'Description 1'
+}, {
+    'id': 2,
+    'title': 'Notebook 2',
+    'author': 'Author 2',
+    'year': 2022,
+    'description': 'Description 2'
+}]
+current_id = 3
 
 @app.route('/notebooks', methods=['GET'])
 def get_notebooks():
